@@ -1,7 +1,5 @@
 import os
 
-
-python -m pip install streamlit
 import streamlit as st
 
 st.set_page_config(page_title="Daily Mood Tracker", page_icon="😄", layout="centered")
@@ -36,3 +34,4 @@ else:
 
 st.subheader(f"**Score:** {score}")
 st.subheader(f"**Mood:** {mood}")
+
