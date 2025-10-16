@@ -93,34 +93,32 @@ with tab_daily:
 
         st.write("Travel safe")
 #Tab decision Maker
-     with tab_decision:
-        st.title("🧠 Decision Energy Model")
-        st.write(
-            "Quantify how attention, emotions, expectations, memories, and perspective shape your outcome probability.")
+    with tab_decision:
+    st.title("🧠 Decision Energy Model")
+    st.write("Quantify how attention, emotions, expectations, memories, and perspective shape your outcome probability.")
 
-        # Replace input() with sliders
-        attention = st.slider("⏱️ Time you can give:  instant versus month", 0.0, 1.0, 0.5)
-        emotions = st.slider("💖 Emotions: awwfull versus awesome,", 0.0, 1.0, 0.5)
-        expectations = st.slider("🎯 Expectations: instant versus delayed gratification", 0.0, 1.0, 0.5)
-        memories = st.slider("🧩 Memories :Good or bad", 0.0, 1.0, 0.5)
-        perspective = st.slider("🌌 Perspective: superficial or deep", 0.0, 1.0, 0.5)
+    attention = st.slider("⏱️ Time", 0.0, 1.0, 0.5)
+    emotions = st.slider("💖 Emotions", 0.0, 1.0, 0.5)
+    expectations = st.slider("🎯 Expectations", 0.0, 1.0, 0.5)
+    memories = st.slider("🧩 Memories", 0.0, 1.0, 0.5)
+    perspective = st.slider("🌌 Perspective", 0.0, 1.0, 0.5)
 
-        weight = attention + emotions + expectations + memories + perspective
-        bias = -0.5 * weight
-        Z = weight + bias
+    import numpy as np
+    weight = attention + emotions + expectations + memories + perspective
+    bias = -0.5 * weight
+    Z = weight + bias
+    p = 1 / (1 + np.exp(-Z))
 
-        # ✅ Use np.exp instead of math.exp
-        p = 1 / (1 + np.exp(-Z))
+    st.write(f"**Z =** {Z:.3f}")
+    st.write(f"**Probability (p) =** {p:.3f}")
 
-        st.write(f"**Z =** {Z:.3f}")
-        st.write(f"**Probability (p) =** {p:.3f}")
-        # Optional interpretation
-        if p < 0.3:
-            st.warning("Outcome seems uncertain — more balance may be needed.")
-        elif p < 0.7:
-            st.info("Moderate probability — outcome depends on focus and alignment.")
-        else:
-            st.success("High probability — strong alignment between intent and reality!")
+    if p < 0.3:
+        st.warning("Outcome seems uncertain — more balance may be needed.")
+    elif p < 0.7:
+        st.info("Moderate probability — outcome depends on focus and alignment.")
+    else:
+        st.success("High probability — strong alignment between intent and reality!")
+
 
 
 
