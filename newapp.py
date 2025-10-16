@@ -7,7 +7,10 @@ st.set_page_config(page_title="My First App", page_icon="📈", layout="centered
 st.title("📈 My first app")
 
 # ---------- TABS ----------
-tab_weekly, tab_daily ,tab_travel= st.tabs(["📅 Weekly Overview", "🌤️ Daily Tracker", "✈️ Travel"])
+tab_weekly, tab_daily ,tab_travel,tab_decision= st.tabs(["📅 Weekly Overview",
+                                            "🌤️ Daily Tracker",
+                                            "✈️ Travel",
+                                            "Decision Maker"])
 
 # ---------- WEEKLY TAB ----------
 with tab_weekly:
@@ -120,6 +123,7 @@ with tab_daily:
             st.info("Moderate probability — outcome depends on focus and alignment.")
         else:
             st.success("High probability — strong alignment between intent and reality!")
+
 
 
 
