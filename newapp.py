@@ -89,7 +89,7 @@ with tab_daily:
 
         st.write("Travel safe")
 #Tab decision Maker
-    with tab_decision
+    with tab_decision:
         st.title("🧠 Decision Energy Model")
         st.write(
             "Quantify how attention, emotions, expectations, memories, and perspective shape your outcome probability.")
@@ -120,6 +120,7 @@ with tab_daily:
             st.info("Moderate probability — outcome depends on focus and alignment.")
         else:
             st.success("High probability — strong alignment between intent and reality!")
+
 
 
 
