@@ -42,7 +42,7 @@ with tab_daily:
     POINTS_PER_TASK = 25
     PRAYER_BONUS = 25
     tasks = [
-        "Eat x2 "
+        "Eat x2 ",
         "Code 💻",
         "Hot tub 🛁",
         "Swimming 🏊",
@@ -84,7 +84,7 @@ with tab_daily:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
     # create  daily data
-    Days = [200, 325]
+    Days = [200, 350,325]
     df = pd.DataFrame({"Day": Days})
     st.dataframe(df)
     # travel Tab
@@ -119,6 +119,7 @@ with tab_decision:
 
     st.write(f"**Z =** {Z:.3f}")
     st.write(f"**Probability (p) =** {p:.3f}")
+
 
 
 
