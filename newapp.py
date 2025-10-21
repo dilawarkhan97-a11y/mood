@@ -85,6 +85,8 @@ with tab_daily:
     st.subheader(f"**Mood:** {mood}")
     # create  daily data
     Days = [200, 350,325,325,325,375]
+    weekly_mean= np.mean(Days)
+    print("Weekly Mean": weekly_mean)
     df = pd.DataFrame({"Day": Days})
     st.dataframe(df)
     # travel Tab
@@ -119,6 +121,7 @@ with tab_decision:
 
     st.write(f"**Z =** {Z:.3f}")
     st.write(f"**Probability (p) =** {p:.3f}")
+
 
 
 
