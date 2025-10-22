@@ -9,18 +9,19 @@ st.set_page_config(page_title="My First App", page_icon="📈", layout="centered
 st.title("📈 My first app")
 
 # ---------- TABS ----------
-tab_weekly, tab_daily, tab_travel, tab_decision = st.tabs(["📅 Weekly Overview",
+tab_weekly, tab_daily, tab_travel, tab_decision, tab_predictor = st.tabs(["📅 Weekly Overview",
                                                            "🌤️ Daily Tracker",
                                                            "✈️ Travel",
-                                                           "Decision Maker"])
+                                                           "📈Decision Maker",
+                                                          "🧩Mood Predictor"])
 
 # ---------- WEEKLY TAB ----------
 with tab_weekly:
     st.subheader("Weekly Productivity")
 
     # Data
-    prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55]
-    prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250]
+    prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55,73]
+    prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250,332]
     weeks = [f"Week {i + 1}" for i in range(len(prod_per))]
     start_date = datetime(25, 8, 6)
     Dates = [(start_date + timedelta(weeks=i)).strftime("%b %d, %Y") for i in range(len(prod_ave))]
@@ -84,7 +85,7 @@ with tab_daily:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
     # create  daily data
-    Days = [200, 350,325,325,325,375]
+    Days = []
     weekly_mean= np.mean(Days)
     st.write("Weekly Mean:", weekly_mean)
     df = pd.DataFrame({"Day": Days})
@@ -119,11 +120,72 @@ with tab_decision:
     Z = weight + bias
     p = 1 / (1 + np.exp(-Z))
 
-    st.write(f"**Z =** {Z:.3f}")
+  
     st.write(f"**Probability (p) =** {p:.3f}")
 
+#Mood predictor tab
+with tab_decision:
+    st.title("🧠 Decision Energy Model")
+    st.write(
+        "Quantify how attention, emotions, expectations, memories, and perspective shape your outcome probability.")
 
+    attention = st.slider("⏱️ Time", 0.0, 1.0, 0.5)
+    emotions = st.slider("💖 Emotions", 0.0, 1.0, 0.5)
+    expectations = st.slider("🎯 Expectations", 0.0, 1.0, 0.5)
+    memories = st.slider("🧩 Memories", 0.0, 1.0, 0.5)
+    perspective = st.slider("🌌 Perspective", 0.0, 1.0, 0.5)
 
+    import numpy as np
+
+    weight = attention + emotions + expectations + memories + perspective
+    bias = -0.5 * weight
+    Z = weight + bias
+    p = 1 / (1 + np.exp(-Z))
+
+    st.write(f"**Z =** {Z:.3f}")
+    st.write(f"**Probability (p) =** {p:.3f}")
+    # Mood predictor tab
+  with tab_predictor:
+    prod_Ave = [200, 300, 310, 321, 292, 317, 307, 282, 182]
+
+    mood = ["Bad 😞", "Normal 😐", "Good 🙂", "Good 🙂", "Normal 😐", "Good 🙂", "Good 🙂", "Normal 😐", "Bad 😞", "Normal 😐", "Good 🙂"]
+
+    # Show the raw data
+    df = pd.DataFrame({"Mood Weekly": mood})
+    st.dataframe(df, use_container_width=True)
+
+    # Prepare states and index map
+    states = sorted(set(mood))  # e.g., ['bad','good','normal']
+    idx = {s: i for i, s in enumerate(states)}
+    n = len(states)
+
+    # Count transitions
+    P = np.zeros((n, n), dtype=float)
+    for i in range(len(mood) - 1):  # for loops execute a block of code a fixed number of times
+        cur, nxt = mood[i], mood[i + 1]
+        P[idx[cur], idx[nxt]] += 1
+
+    # Normalize rows to probabilities (guard against zero rows)
+    row_sums = P.sum(axis=1, keepdims=True)
+    row_sums[row_sums == 0] = 1.0
+    P = P / row_sums
+
+    # Display transition matrix with labels
+    P_df = pd.DataFrame(P, index=states, columns=states)
+    st.write("Transition matrix (rows = current, columns = next):")
+    st.dataframe(P_df.style.format("{:.2f}"), use_container_width=True)
+
+    # Predict next mood from the last observed mood
+    last_state = mood[-1]
+    last_vec = np.zeros(n)
+    last_vec[idx[last_state]] = 1.0
+    next_probs = last_vec @ P
+
+    probs_series = pd.Series(next_probs, index=states).sort_values(ascending=False)
+    predicted = probs_series.idxmax()
+
+    st.write("Next mood probabilities:")
+    st.write(probs_series.to_frame("probability"))
 
 
 
