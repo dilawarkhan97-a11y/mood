@@ -145,7 +145,7 @@ with tab_decision:
     st.write(f"**Z =** {Z:.3f}")
     st.write(f"**Probability (p) =** {p:.3f}")
     # Mood predictor tab:
-  with tab_predictor:
+with tab_predictor:
     prod_Ave = [200, 300, 310, 321, 292, 317, 307, 282, 182]
 
     mood = ["Bad 😞", "Normal 😐", "Good 🙂", "Good 🙂", "Normal 😐", "Good 🙂", "Good 🙂", "Normal 😐", "Bad 😞", "Normal 😐", "Good 🙂"]
@@ -155,7 +155,7 @@ with tab_decision:
     st.dataframe(df, use_container_width=True)
 
     # Prepare states and index map
-    states = sorted(set(mood))  # e.g., ['bad','good','normal']
+    states = sorted(set(mood))  # e.g., ['Bad 😞', 'Good 🙂', 'Normal 😐']
     idx = {s: i for i, s in enumerate(states)}
     n = len(states)
 
@@ -186,6 +186,8 @@ with tab_decision:
 
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
+    st.success(f"Predicted next mood: {predicted}")
+
 
 
 
