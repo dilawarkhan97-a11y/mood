@@ -144,7 +144,7 @@ with tab_decision:
 
     st.write(f"**Z =** {Z:.3f}")
     st.write(f"**Probability (p) =** {p:.3f}")
-    # Mood predictor tab
+    # Mood predictor tab:
   with tab_predictor:
     prod_Ave = [200, 300, 310, 321, 292, 317, 307, 282, 182]
 
@@ -186,6 +186,7 @@ with tab_decision:
 
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
+
 
 
 
