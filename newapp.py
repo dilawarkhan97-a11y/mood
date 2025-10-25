@@ -115,7 +115,7 @@ with tab_decision_maker:
 
     import numpy as np
 
-    weight = Attention + Emotions + Expectations + memories + perspective
+    weight = Attention + Emotions + Expectations + Memories + Perspective
     bias = -0.5 * weight
     Z = weight + bias
     p = 1 / (1 + np.exp(-Z))
@@ -166,6 +166,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
