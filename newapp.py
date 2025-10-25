@@ -9,7 +9,7 @@ st.set_page_config(page_title="My First App", page_icon="📈", layout="centered
 st.title("📈 My first app")
 
 # ---------- TABS ----------
-tab_weekly, tab_daily, tab_travel, tab_decision, tab_predictor = st.tabs(["📅 Weekly Overview",
+tab_weekly, tab_daily, tab_travel, tab_decision_maker, tab_predictor = st.tabs(["📅 Weekly Overview",
                                                            "🌤️ Daily Tracker",
                                                            "✈️ Travel",
                                                            "📈Decision Maker",
@@ -102,14 +102,14 @@ with tab_daily:
         st.write("Travel safe")
 
     # Tab decision Maker
-with tab_decision:
+with tab_decision_maker:
     st.title("🧠 Decision Energy Model")
     st.write(
         "Quantify how attention, emotions, expectations, memories, and perspective shape your outcome probability.")
 
     Attention = st.slider("⏱️ Time", 0.0, 1.0, 0.5)
     Emotions = st.slider("💖 Emotions", 0.0, 1.0, 0.5)
-    Expectations(intentions) = st.slider("🎯 Expectations", 0.0, 1.0, 0.5)
+    expectations(intentions) = st.slider("🎯 Expectations", 0.0, 1.0, 0.5)
     memories = st.slider("🧩 Memories", 0.0, 1.0, 0.5)
     perspective = st.slider("🌌 Perspective", 0.0, 1.0, 0.5)
 
@@ -187,6 +187,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
