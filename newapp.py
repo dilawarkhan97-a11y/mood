@@ -85,7 +85,7 @@ with tab_daily:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
     # create  daily data
-    Days = [400]
+    Days = [400,425]
     weekly_mean= np.mean(Days)
     st.write("Weekly Mean:", weekly_mean)
     df = pd.DataFrame({"Day": Days})
@@ -107,15 +107,15 @@ with tab_decision:
     st.write(
         "Quantify how attention, emotions, expectations, memories, and perspective shape your outcome probability.")
 
-    attention = st.slider("⏱️ Time", 0.0, 1.0, 0.5)
-    emotions = st.slider("💖 Emotions", 0.0, 1.0, 0.5)
-    expectations = st.slider("🎯 Expectations", 0.0, 1.0, 0.5)
+    Attention = st.slider("⏱️ Time", 0.0, 1.0, 0.5)
+    Emotions = st.slider("💖 Emotions", 0.0, 1.0, 0.5)
+    Expectations(intentions) = st.slider("🎯 Expectations", 0.0, 1.0, 0.5)
     memories = st.slider("🧩 Memories", 0.0, 1.0, 0.5)
     perspective = st.slider("🌌 Perspective", 0.0, 1.0, 0.5)
 
     import numpy as np
 
-    weight = attention + emotions + expectations + memories + perspective
+    weight = Attention + Emotions(intentions) + expectations + memories + perspective
     bias = -0.5 * weight
     Z = weight + bias
     p = 1 / (1 + np.exp(-Z))
@@ -187,6 +187,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
