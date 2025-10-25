@@ -115,7 +115,7 @@ with tab_decision_maker:
 
     import numpy as np
 
-    weight = Attention + Emotions + expectations + memories + perspective
+    weight = Attention + Emotions + Expectations + memories + perspective
     bias = -0.5 * weight
     Z = weight + bias
     p = 1 / (1 + np.exp(-Z))
@@ -123,28 +123,7 @@ with tab_decision_maker:
   
     st.write(f"**Probability (p) =** {p:.3f}")
 
-#Mood predictor tab
-with tab_decision:
-    st.title("🧠 Decision Energy Model")
-    st.write(
-        "Quantify how attention, emotions, expectations, memories, and perspective shape your outcome probability.")
 
-    attention = st.slider("⏱️ Time", 0.0, 1.0, 0.5)
-    emotions = st.slider("💖 Emotions", 0.0, 1.0, 0.5)
-    expectations = st.slider("🎯 Expectations", 0.0, 1.0, 0.5)
-    memories = st.slider("🧩 Memories", 0.0, 1.0, 0.5)
-    perspective = st.slider("🌌 Perspective", 0.0, 1.0, 0.5)
-
-    import numpy as np
-
-    weight = attention + emotions + expectations + memories + perspective
-    bias = -0.5 * weight
-    Z = weight + bias
-    p = 1 / (1 + np.exp(-Z))
-
-    st.write(f"**Z =** {Z:.3f}")
-    st.write(f"**Probability (p) =** {p:.3f}")
-    # Mood predictor tab:
 with tab_predictor:
     prod_Ave = [200, 300, 310, 321, 292, 317, 307, 282, 182]
 
@@ -187,6 +166,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
