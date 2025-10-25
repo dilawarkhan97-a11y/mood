@@ -109,13 +109,13 @@ with tab_decision_maker:
 
     Attention = st.slider("⏱️ Time", 0.0, 1.0, 0.5)
     Emotions = st.slider("💖 Emotions", 0.0, 1.0, 0.5)
-    expectations(intentions) = st.slider("🎯 Expectations", 0.0, 1.0, 0.5)
-    memories = st.slider("🧩 Memories", 0.0, 1.0, 0.5)
-    perspective = st.slider("🌌 Perspective", 0.0, 1.0, 0.5)
+    Expectations = st.slider("🎯 Expectations", 0.0, 1.0, 0.5)
+    Memories = st.slider("🧩 Memories from past are good  or bad", 0.0, 1.0, 0.5)
+    Perspective = st.slider("🌌 Superficial or deep", 0.0, 1.0, 0.5)
 
     import numpy as np
 
-    weight = Attention + Emotions(intentions) + expectations + memories + perspective
+    weight = Attention + Emotions + expectations + memories + perspective
     bias = -0.5 * weight
     Z = weight + bias
     p = 1 / (1 + np.exp(-Z))
@@ -187,6 +187,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
