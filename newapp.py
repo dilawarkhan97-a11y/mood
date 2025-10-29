@@ -18,20 +18,18 @@ tab_weekly, tab_daily, tab_travel, tab_decision_maker, tab_predictor = st.tabs([
 # ---------- WEEKLY TAB ----------
 with tab_weekly:
     st.subheader("Weekly Productivity")
-
-     prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55,73,88]
-    prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250,332,396]
-    weeks = [f"Week {i + 1}" for i in range(len(prod_per))]
-    start_date = datetime(25, 8, 6)
-    Dates = [(start_date + timedelta(weeks=i)).strftime("%b %d, %Y") for i in range(len(prod_ave))]
-
-    df = pd.DataFrame({"Week": weeks,
+prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55,73,88]
+prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250,332,396]
+weeks = [f"Week {i + 1}" for i in range(len(prod_per))]
+start_date = datetime(25, 8, 6)
+Dates = [(start_date + timedelta(weeks=i)).strftime("%b %d, %Y") for i in range(len(prod_ave))]
+df = pd.DataFrame({"Week": weeks,
                        "Productivity (%)": prod_per,
                        "Average Output": prod_ave,
                        "Dates": Dates})
 
-    st.dataframe(df, use_container_width=True)
-    st.line_chart(df.set_index("Week")[["Productivity (%)", "Average Output"]])
+st.dataframe(df, use_container_width=True)
+st.line_chart(df.set_index("Week")[["Productivity (%)", "Average Output"]])
 
 # ---------- DAILY TAB ----------
 with tab_daily:
@@ -165,6 +163,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
