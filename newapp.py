@@ -19,9 +19,8 @@ tab_weekly, tab_daily, tab_travel, tab_decision_maker, tab_predictor = st.tabs([
 with tab_weekly:
     st.subheader("Weekly Productivity")
 
-    # Data
-    prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55,73]
-    prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250,332]
+     prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55,73,88]
+    prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250,332,396]
     weeks = [f"Week {i + 1}" for i in range(len(prod_per))]
     start_date = datetime(25, 8, 6)
     Dates = [(start_date + timedelta(weeks=i)).strftime("%b %d, %Y") for i in range(len(prod_ave))]
@@ -85,7 +84,7 @@ with tab_daily:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
     # create  daily data
-    Days = [400,450,400,400,400,]
+    Days = []
     weekly_mean= np.mean(Days)
     st.write("Weekly Mean:", weekly_mean)
     df = pd.DataFrame({"Day": Days})
@@ -166,6 +165,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
