@@ -124,7 +124,7 @@ with tab_decision_maker:
 with tab_predictor:
     prod_Ave = [200, 300, 310, 321, 292, 317, 307, 282, 182]
 
-    mood = ["Bad 😞", "Normal 😐", "Good 🙂", "Good 🙂", "Normal 😐", "Good 🙂", "Good 🙂", "Normal 😐", "Bad 😞", "Normal 😐", "Good 🙂"]
+    mood = ["Bad 😞", "Normal 😐", "Good 🙂", "Good 🙂", "Normal 😐", "Good 🙂", "Good 🙂", "Normal 😐", "Bad 😞", "Normal 😐", "Good 🙂","Good 🙂"]
 
     # Show the raw data
     df = pd.DataFrame({"Mood Weekly": mood})
@@ -163,6 +163,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
