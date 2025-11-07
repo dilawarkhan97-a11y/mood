@@ -33,10 +33,10 @@ with tab_weekly:
 
 # Add numeric week index for sorting
   df["WeekNum"] = df["Week"].str.extract("(\d+)").astype(int)
-df = df.sort_values("WeekNum")
+  df = df.sort_values("WeekNum")
 
 # Assign grades based on Productivity (%)
-  df["Grade"] = pd.cut(
+    df["Grade"] = pd.cut(
     df["Productivity (%)"],
     bins=[0, 60, 70, 80, 90, 100],
     labels=["F", "D", "C", "B", "A"],
@@ -180,6 +180,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
