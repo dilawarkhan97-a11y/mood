@@ -17,19 +17,36 @@ tab_weekly, tab_daily, tab_travel, tab_decision_maker, tab_predictor = st.tabs([
 
 # ---------- WEEKLY TAB ----------
 with tab_weekly:
-    st.subheader("Weekly Productivity")
-prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55,73,88,75]
-prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250,332,396,339]
+prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55, 73, 88, 75]
+prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250, 332, 396, 339]
 weeks = [f"Week {i + 1}" for i in range(len(prod_per))]
-start_date = datetime(25, 8, 6)
-Dates = [(start_date + timedelta(weeks=i)).strftime("%b %d, %Y") for i in range(len(prod_ave))]
-df = pd.DataFrame({"Week": weeks,
-                       "Productivity (%)": prod_per,
-                       "Average Output": prod_ave,
-                       "Dates": Dates})
 
-st.dataframe(df, use_container_width=True)
+start_date = datetime(2025, 8, 6)
+Dates = [(start_date + timedelta(weeks=i)).strftime("%b %d, %Y") for i in range(len(prod_ave))]
+
+df = pd.DataFrame({
+    "Week": weeks,
+    "Productivity (%)": prod_per,
+    "Average Output": prod_ave,
+    "Dates": Dates
+})
+
+# Add numeric week index for sorting
+df["WeekNum"] = df["Week"].str.extract("(\d+)").astype(int)
+df = df.sort_values("WeekNum")
+
+# Assign grades based on Productivity (%)
+df["Grade"] = pd.cut(
+    df["Productivity (%)"],
+    bins=[0, 60, 70, 80, 90, 100],
+    labels=["F", "D", "C", "B", "A"],
+    right=False
+)
+
+# Show table and chart
+st.dataframe(df[["Week", "Dates", "Productivity (%)", "Average Output", "Grade"]], use_container_width=True)
 st.line_chart(df.set_index("Week")[["Productivity (%)", "Average Output"]])
+
 
 # ---------- DAILY TAB ----------
 with tab_daily:
@@ -82,7 +99,7 @@ with tab_daily:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
     # create  daily data
-    Days = []
+    Days = [400,400]
     weekly_mean= np.mean(Days)
     st.write("Weekly Mean:", weekly_mean)
     df = pd.DataFrame({"Day": Days})
@@ -163,6 +180,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
