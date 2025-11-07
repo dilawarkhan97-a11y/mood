@@ -38,10 +38,10 @@ with tab_weekly:
 # Assign grades based on Productivity (%)
     df["Grade"] = pd.cut(
     df["Productivity (%)"],
-    bins=[0, 60, 70, 80, 90, 100],
-    labels=["F", "D", "C", "B", "A"],
-    right=False
-  )
+      bins=[0, 60, 70, 80, 90, 100],
+      labels=["F", "D", "C", "B", "A"],
+      right=False
+    )
 
 # Show table and chart
   st.dataframe(df[["Week", "Dates", "Productivity (%)", "Average Output", "Grade"]], use_container_width=True)
@@ -180,6 +180,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
