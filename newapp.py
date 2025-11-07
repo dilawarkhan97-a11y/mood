@@ -99,7 +99,7 @@ with tab_daily:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
     # create  daily data
-    Days = [400,400]
+    Days = [400,425]
     weekly_mean= np.mean(Days)
     st.write("Weekly Mean:", weekly_mean)
     df = pd.DataFrame({"Day": Days})
@@ -180,6 +180,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
