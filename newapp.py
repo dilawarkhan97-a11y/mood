@@ -17,8 +17,8 @@ tab_weekly, tab_daily, tab_travel, tab_decision_maker, tab_predictor = st.tabs([
 
 # ---------- WEEKLY TAB ----------
 with tab_weekly:  
-  prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55, 73, 88, 75]
-  prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250, 332, 396, 339]
+  prod_per = [27, 65, 69, 71, 65, 70, 68, 63, 40, 55, 73, 88, 75,75]
+  prod_ave = [130, 300, 310, 321, 292, 317, 307, 282, 182, 250, 332, 396, 339,339]
   weeks = [f"Week {i + 1}" for i in range(len(prod_per))]
 
   start_date = datetime(2025, 8, 6)
@@ -180,6 +180,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
