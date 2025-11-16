@@ -4,7 +4,7 @@ import datetime as dt
 import io
 from datetime import datetime, timedelta
 import numpy as np
-
+import json
 st.set_page_config(page_title="My First App", page_icon="📈", layout="centered")
 st.title("📈 My first app")
 
@@ -98,12 +98,32 @@ with tab_daily:
     else:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
-    # create  daily data
-    Days = [400,425,200,325,350,350,325]
-    weekly_mean= np.mean(Days)
-    st.write("Weekly Mean:", weekly_mean)
-    df = pd.DataFrame({"Day": Days})
-    st.dataframe(df)
+        FILE = "Daily Productivity"
+    def load_data():
+        try:
+            with open(FILE, "r") as f:
+                return json.load(f)
+        except:
+            return []
+
+
+    def save_data(entry):
+        data = load_data()
+        data.append(entry)
+        with open(FILE, "w") as f:
+            json.dump(data, f, indent=2)
+
+
+    score = st.text_input("What is the score today")
+    Day = st.text_input("What is the day toaday?")
+    if st.button("Save"):
+        entry = {
+            "Day": Day ,
+            "Score": score
+        }
+        save_data(entry)
+        st.success("Saved!")
+    st.json(load_data())
     # travel Tab
     with tab_travel:
         st.title("Travel checklist")
@@ -180,6 +200,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
