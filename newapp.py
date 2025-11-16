@@ -98,7 +98,7 @@ with tab_daily:
     else:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
-        FILE = "Daily Productivity"
+    FILE = "Daily Productivity"
     def load_data():
         try:
             with open(FILE, "r") as f:
@@ -200,6 +200,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
