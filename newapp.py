@@ -98,9 +98,11 @@ with tab_daily:
     else:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
-    FILE = "Daily Productivity"
+    FILE = os.path.join(os.path.dirname(__file__),"Daily Productivity")
     def load_data():
-        try:
+      if not os.path.exists(FILE):
+        return[]
+     try:
             with open(FILE, "r") as f:
                 return json.load(f)
         except:
@@ -200,6 +202,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
