@@ -102,7 +102,7 @@ with tab_daily:
     def load_data():
       if not os.path.exists(FILE):
         return[]
-     try:
+        try:
             with open(FILE, "r") as f:
                 return json.load(f)
         except:
@@ -202,6 +202,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
