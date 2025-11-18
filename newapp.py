@@ -99,23 +99,32 @@ with tab_daily:
     else:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
-    FILE = os.path.join(os.path.dirname(__file__),"Daily Productivity")
-    def load_data():
-      if not os.path.exists(FILE):
-        return[]
-        try:
-            with open(FILE, "r") as f:
-                return json.load(f)
-        except:
+    FOLDER = os.path.join(os.path.dirname(__file__), "Daily Productivity")
+FILE = os.path.join(FOLDER, "data.json")
+
+# Create folder if missing
+os.makedirs(FOLDER, exist_ok=True)
+
+
+def load_data():
+    if not os.path.exists(FILE):
+        return []
+
+    try:
+        with open(FILE, "r") as f:
+            data = json.load(f)
+            if isinstance(data, list):
+                return data
             return []
+    except:
+        return []
 
 
-    def save_data(entry):
-        data = load_data()
-        data.append(entry)
-        with open(FILE, "w") as f:
-            json.dump(data, f, indent=2)
-
+def save_data(entry):
+    data = load_data()
+    data.append(entry)
+    with open(FILE, "w") as f:
+        json.dump(data, f, indent=2)
 
     score = st.text_input("What is the score today")
     Day = st.text_input("What is the day toaday?")
@@ -203,6 +212,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
