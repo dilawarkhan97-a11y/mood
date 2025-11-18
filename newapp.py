@@ -127,26 +127,39 @@ def save_data(entry):
     with open(FILE, "w") as f:
         json.dump(data, f, indent=2)
 
-    score = st.text_input("What is the score today")
-    Day = st.text_input("What is the day toaday?")
-    if st.button("Save"):
-        entry = {
-            "Day": Day ,
-            "Score": score
-        }
-        save_data(entry)
-        st.success("Saved!")
-    st.json(load_data())
-    # travel Tab
-    with tab_travel:
-        st.title("Travel checklist")
-        st.write("Check everything you have packed")
-        tasks = [
-            "Passport/ID", "Charger", "Cell phones", "Laptop", "Meds", "Clothes", "Toiletries", "ATM cards"
-        ]
-        checks = {t: st.checkbox(t) for t in tasks}
 
-        st.write("Travel safe")
+# ----------------------------
+# STREAMLIT UI (TOP LEVEL)
+# ----------------------------
+
+score = st.text_input("What is the score today")
+Day = st.text_input("What is the day today?")
+
+if st.button("Save"):
+    entry = {
+        "Day": Day,
+        "Score": score,
+    }
+    save_data(entry)
+    st.success("Saved!")
+
+st.json(load_data())
+
+
+# ------------ TRAVEL TAB -------------
+with tab_travel:
+    st.title("Travel checklist")
+    st.write("Check everything you have packed")
+
+    tasks = [
+        "Passport/ID", "Charger", "Cell phones", "Laptop",
+        "Meds", "Clothes", "Toiletries", "ATM cards"
+    ]
+
+    checks = {t: st.checkbox(t) for t in tasks}
+
+    st.write("Travel safe")
+
 
     # Tab decision Maker
 with tab_decision_maker:
@@ -213,6 +226,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
