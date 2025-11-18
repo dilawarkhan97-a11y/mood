@@ -99,7 +99,7 @@ with tab_daily:
     else:
         mood = "Great 😄"
     st.subheader(f"**Mood:** {mood}")
-    FOLDER = os.path.join(os.path.dirname(__file__), "Daily Productivity")
+  FOLDER = os.path.join(os.path.dirname(__file__), "Daily_Productivity")
 FILE = os.path.join(FOLDER, "data.json")
 
 # Create folder if missing
@@ -212,6 +212,7 @@ with tab_predictor:
     st.write("Next mood probabilities:")
     st.write(probs_series.to_frame("probability"))
     st.success(f"Predicted next mood: {predicted}")
+
 
 
 
